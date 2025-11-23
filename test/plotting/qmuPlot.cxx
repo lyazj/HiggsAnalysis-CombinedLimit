@@ -155,7 +155,7 @@ TCanvas *q0Plot(float mass, std::string poinam , float poival, int rebin=0, bool
     double sig = RooStats::PValueToSignificance(pB);
     double sigerr = 0.5*( TMath::Abs(RooStats::PValueToSignificance(pB+pBerr)-sig) + TMath::Abs(RooStats::PValueToSignificance(pB-pBerr)-sig));
 
-    printf("P-val (1-Pb)  = %.4f +/- %.4f\n", pB , pBerr);
+    printf("P-val (1-Pb)  = %.8f +/- %.8f\n", pB , pBerr);
     printf("Signif  = %.1f +/- %.2f sigma\n",  sig, sigerr);
 
     // Worst way to calculate !
@@ -179,7 +179,7 @@ TCanvas *q0Plot(float mass, std::string poinam , float poival, int rebin=0, bool
     leg2->SetTextFont(42);
     leg2->SetTextSize(0.04);
     leg2->SetLineColor(1);
-    leg2->AddEntry(qB1, Form("CL_{b}   = %.4f (%.1f#sigma)", pB,sig), "F");
+    leg2->AddEntry(qB1, Form("CL_{b}   = %.8f (%.1f#sigma)", pB,sig), "F");
     qB->Draw();
     qB1->Draw("HIST SAME"); 
     if (plotBoth){
@@ -301,9 +301,9 @@ TCanvas *qmuPlot(float mass, std::string poinam, double poival, int mode=0, int 
     double pMUerr = sqrt(pMU*(1-pMU)/nS);
     double pBerr  = sqrt(pB*(1-pB)/nB);
     double pSerr  = clS * TMath::Hypot(pBerr/pB, pMUerr/pMU);
-    printf("Pmu   = %.4f +/- %.4f\n", pMU , pMUerr);
-    printf("1-Pb   = %.4f +/- %.4f\n", pB , pBerr);
-    printf("CLs    = %.4f +/- %.4f\n", clS , pSerr);
+    printf("Pmu   = %.8f +/- %.8f\n", pMU , pMUerr);
+    printf("1-Pb   = %.8f +/- %.8f\n", pB , pBerr);
+    printf("CLs    = %.8f +/- %.8f\n", clS , pSerr);
 
     // Worst way to calculate !
     TH1F *qS1 = tail(qS, qObs,mode); 
@@ -340,10 +340,10 @@ TCanvas *qmuPlot(float mass, std::string poinam, double poival, int mode=0, int 
     leg2->SetTextSize(0.04);
     leg2->SetLineColor(1);
     //if (mode==0) 
-    leg2->AddEntry(qS1, Form("p_{#mu} = %.4f", pMU), "F"); 
+    leg2->AddEntry(qS1, Form("p_{#mu} = %.8f", pMU), "F"); 
     //if (mode==0) 
-    leg2->AddEntry(qB1, Form("1-p_{b}  = %.4f", pB), "F");
-    leg2->AddEntry("",  Form("CL_{s}   = %.4f", clS), "");
+    leg2->AddEntry(qB1, Form("1-p_{b}  = %.8f", pB), "F");
+    leg2->AddEntry("",  Form("CL_{s}   = %.8f", clS), "");
 
     qB->Draw();
 
