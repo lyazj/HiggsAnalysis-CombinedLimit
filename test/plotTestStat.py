@@ -24,6 +24,7 @@ def qmuPlot(m, poi, poival, expected):
     import matplotlib.pyplot as plt
     import mplhep as hep
 
+    hep.style.use("CMS")
     q = uproot.open("tmp_out.root:q").arrays(library="ak")
     qS = 2 * q[q["type"] == 1].q.to_numpy()
     qO = 2 * q[q["type"] == 0].q.to_numpy().mean()
@@ -32,7 +33,7 @@ def qmuPlot(m, poi, poival, expected):
     plt.hist(qS, bins=100, density=True, histtype="step", label=f"{poi} = {poival}")
     plt.axvline(qO, color="black", linestyle="dashed", label="Expected" if expected else "Observed")
     plt.plot([], [], label=f"p = {pS:.8f}", alpha=0)
-    hep.cms.text("Preliminary", loc=0)
+    hep.cms.label(data=True, label="Preliminary", year="2016–2024", com="13–13.6")
     plt.xlabel(f"q({poi})")
     plt.ylabel("Density")
     plt.legend()
