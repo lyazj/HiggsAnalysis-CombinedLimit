@@ -55,7 +55,7 @@ if args.obs:
     plt.plot(
         x_obs[1:],
         y_obs[1:],
-        ".--",
+        "*-",
         label=f"Observed (${x_obs[0]:.3f}^{{+{xr_obs - x_obs[0]:.3f}}}_{{-{x_obs[0] - xl_obs:.3f}}}$)",
         color="black",
     )
