@@ -34,7 +34,7 @@ def find_crossings_with_spline(x, y, x_best, target):
 hep.style.use("CMS")
 hep.cms.label(data=True, label=args.label, year=args.year, com=args.com)
 if args.exp:
-    exp = uproot.open(args.exp)["limit"].arrays()
+    exp = uproot.open(args.exp)["limit"].arrays([args.poi, "deltaNLL"])
     x_exp = exp[args.poi]
     y_exp = 2 * exp["deltaNLL"]
     xl_exp, xr_exp = find_crossings_with_spline(x_exp[1:], y_exp[1:], x_exp[0], 1.0)
@@ -47,7 +47,7 @@ if args.exp:
         color="black",
     )
 if args.obs:
-    obs = uproot.open(args.obs)["limit"].arrays()
+    obs = uproot.open(args.obs)["limit"].arrays([args.poi, "deltaNLL"])
     x_obs = obs[args.poi]
     y_obs = 2 * obs["deltaNLL"]
     xl_obs, xr_obs = find_crossings_with_spline(x_obs[1:], y_obs[1:], x_obs[0], 1.0)
