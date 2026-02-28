@@ -8,7 +8,9 @@ parser.add_argument("--obs", help="Path to the observed scan results file")
 parser.add_argument("--out", required=True, help="Output file name for the plot")
 parser.add_argument("--poi", required=True, help="Parameter of interest")
 parser.add_argument("--label", default="Preliminary", help="Label for the plot")
-parser.add_argument("--year", default="2016–2024", help="Data-taking year(s)")
+parser.add_argument("--xlabel", default=None, help="X-axis label")
+parser.add_argument("--year", default=None, help="Data-taking year(s)")
+parser.add_argument("--lumi", default="200", help="Integrated luminosity (fb^-1)")
 parser.add_argument("--com", default="13–13.6", help="Center-of-mass energy")
 args = parser.parse_args()
 
@@ -32,7 +34,7 @@ def find_crossings_with_spline(x, y, x_best, target):
 
 
 hep.style.use("CMS")
-hep.cms.label(data=True, label=args.label, year=args.year, com=args.com)
+hep.cms.label(data=True, label=args.label or None, year=args.year or None, lumi=args.lumi or None, com=args.com or None)
 if args.exp:
     exp = uproot.open(args.exp)["limit"].arrays([args.poi, "deltaNLL"])
     x_exp = exp[args.poi]
@@ -61,8 +63,8 @@ if args.obs:
     )
 plt.axhline(1.0, color="gray")
 plt.axhline(4.0, color="gray")
-plt.xlabel(args.poi)
-plt.ylabel(r"$-2\Delta\log L$")
+plt.xlabel(args.xlabel or args.poi, loc="center")
+plt.ylabel(r"$-2\Delta\log L$", loc="center")
 plt.grid()
 plt.legend()
 plt.tight_layout()
