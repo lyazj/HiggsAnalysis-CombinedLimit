@@ -10,7 +10,7 @@ parser.add_argument("--poi", required=True, help="Parameter of interest")
 parser.add_argument("--label", default="Preliminary", help="Label for the plot")
 parser.add_argument("--xlabel", default=None, help="X-axis label")
 parser.add_argument("--year", default=None, help="Data-taking year(s)")
-parser.add_argument("--lumi", default="200", help="Integrated luminosity (fb^-1)")
+parser.add_argument("--lumi", default="309", help="Integrated luminosity (fb^-1)")
 parser.add_argument("--com", default="13 and 13.6", help="Center-of-mass energy")
 args = parser.parse_args()
 
